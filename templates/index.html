@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP_NAME</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>APP_ICON APP_NAME</h1>
+    </header>
+    <main>
+        <h2>Welcome to APP_NAME</h2>
+        <p>Your app is running on port APP_PORT.</p>
+        <br>
+        <button onclick="testApi()">Test API</button>
+        <div id="result"></div>
+    </main>
+
+    <script>
+        async function testApi() {
+            const response = await fetch('/api/example');
+            const data = await response.json();
+            document.getElementById('result').innerHTML =
+                `<p style="margin-top: 1rem; color: green;">${data.message}</p>`;
+        }
+    </script>
+</body>
+</html>
