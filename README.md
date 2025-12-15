@@ -41,6 +41,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable app-template
 sudo systemctl start app-template
 
+# Configure passwordless sudo for service restart (required for deployment)
+sudo visudo -f /etc/sudoers.d/app-template
+# Add this line:
+# dhughes ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart app-template
+# Save and exit (Ctrl+X, then Y, then Enter)
+
 # Deploy infrastructure to update Caddy configuration
 cd ~/infrastructure
 sudo ./deploy.sh
