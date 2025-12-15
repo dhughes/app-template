@@ -1,6 +1,6 @@
 {
-  "name": "APP_NAME",
+  "name": "App Template",
   "icon": "📱",
   "image": null,
-  "description": "APP_DESCRIPTION"
+  "description": "Template for creating new home server applications"
 }

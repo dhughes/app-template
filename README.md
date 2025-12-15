@@ -1,6 +1,6 @@
-# APP_NAME
+# App Template
 
-APP_DESCRIPTION
+Template for creating new home server applications
 
 ## Development
 
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Access at: http://localhost:APP_PORT
+Access at: http://localhost:7999
 
 ## First-Time Installation on Server
 
@@ -27,8 +27,8 @@ SSH to the server and run these commands:
 ```bash
 # Clone the repository
 cd ~/apps
-git clone <repo-url> APP_SLUG
-cd APP_SLUG
+git clone <repo-url> app-template
+cd app-template
 
 # Create virtual environment and install dependencies
 python3 -m venv venv
@@ -36,10 +36,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Install systemd service
-sudo ln -s /home/dhughes/apps/APP_SLUG/APP_SLUG.service /etc/systemd/system/
+sudo ln -s /home/dhughes/apps/app-template/app-template.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable APP_SLUG
-sudo systemctl start APP_SLUG
+sudo systemctl enable app-template
+sudo systemctl start app-template
 
 # Deploy infrastructure to update Caddy configuration
 cd ~/infrastructure
@@ -49,8 +49,8 @@ sudo ./deploy.sh
 Check that everything is running:
 
 ```bash
-systemctl status APP_SLUG
-journalctl -u APP_SLUG -f
+systemctl status app-template
+journalctl -u app-template -f
 ```
 
 ## Deployment
@@ -65,4 +65,4 @@ This will push changes to git, SSH to the server, pull updates, install dependen
 
 ## Port
 
-This app runs on port APP_PORT.
+This app runs on port 7999.

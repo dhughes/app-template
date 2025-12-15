@@ -1,0 +1,14 @@
+[Unit]
+Description=App Template
+After=network.target
+
+[Service]
+Type=simple
+User=dhughes
+WorkingDirectory=/home/dhughes/apps/app-template
+ExecStart=/home/dhughes/apps/app-template/venv/bin/python app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Deploying APP_NAME..."
+echo "🚀 Deploying App Template..."
 
 # Pull latest changes
 echo "📥 Pulling latest changes..."
@@ -17,9 +17,9 @@ sudo ~/infrastructure/deploy.sh caddy
 
 # Restart service
 echo "🔄 Restarting service..."
-sudo systemctl restart APP_SLUG
+sudo systemctl restart app-template
 
 # Show status
 echo "✅ Deployment complete!"
 echo "📊 Service status:"
-systemctl status APP_SLUG
+systemctl status app-template

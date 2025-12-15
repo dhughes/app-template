@@ -10,7 +10,7 @@ def index():
 
 @app.route('/api/example', methods=['GET'])
 def example_endpoint():
-    return jsonify({'message': 'Hello from APP_NAME!'})
+    return jsonify({'message': 'Hello from App Template!'})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7999, debug=True)

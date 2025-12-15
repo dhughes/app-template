@@ -11,59 +11,61 @@ When the user asks you to create a new app from this template, follow these step
    - App slug (URL-safe name, e.g., "my-cool-app")
    - App description (short description for the app card)
    - App icon (emoji, e.g., "🚀")
-   - Port number (find the next available port by checking existing apps)
+   - Port number (find the next available port by checking existing apps in /Users/doughughes/Projects/Personal/*/caddy.conf)
    - Whether the app should be public or private (add/remove forward_auth in caddy.conf)
 
 2. **Copy this template to a new directory:**
    ```bash
-   cp -r /Users/doughughes/Projects/Personal/app-template /Users/doughughes/Projects/Personal/APP_SLUG
+   cp -r /Users/doughughes/Projects/Personal/app-template /Users/doughughes/Projects/Personal/NEW_SLUG
    ```
 
-3. **Replace all placeholders in the new directory:**
-   - `APP_NAME` → actual display name
-   - `APP_SLUG` → URL-safe slug
-   - `APP_DESCRIPTION` → description
-   - `APP_ICON` → emoji icon
-   - `APP_PORT` → port number (e.g., 8005, 8006, etc.)
-   - Rename `app-slug.service` to `APP_SLUG.service`
+3. **Replace all instances in the new directory:**
+   - "App Template" → actual display name (in app.json, *.service, deploy scripts, README.md, CLAUDE.md, index.html, app.py)
+   - "app-template" → URL-safe slug (in caddy.conf, *.service, deploy scripts, README.md, CLAUDE.md)
+   - "📱" → emoji icon (in app.json, index.html)
+   - "Template for creating new home server applications" → description (in app.json, README.md)
+   - "7999" → port number (in caddy.conf, app.py, index.html, README.md)
+   - Rename `app-template.service` to `NEW_SLUG.service`
 
-4. **Make deployment scripts executable:**
-   ```bash
-   chmod +x deploy.sh deploy-to-prod.sh
-   ```
+4. **Update caddy.conf for public vs private:**
+   - Private apps (default): keep `forward_auth` block
+   - Public apps: remove the `forward_auth` block
 
-5. **Initialize git repository:**
+5. **Scripts are already executable** (permissions are preserved during copy)
+
+6. **Initialize git repository:**
    ```bash
-   cd /Users/doughughes/Projects/Personal/APP_SLUG
+   cd /Users/doughughes/Projects/Personal/NEW_SLUG
    git init
    git add .
-   git commit -m "Initial scaffold for APP_NAME"
+   git commit -m "Initial scaffold for NEW_NAME"
    ```
 
-6. **Create CLAUDE.md for the new app** with project-specific context.
+7. **Create CLAUDE.md for the new app** with project-specific context.
 
 ## Template Files Reference
 
-All files in this template contain placeholders that need to be replaced:
+All files in this template use "App Template", "app-template", "📱", "7999", etc. that need to be replaced:
 
 - `app.json` - App metadata for the index page
 - `caddy.conf` - Reverse proxy configuration (includes forward_auth for private apps by default)
 - `app.py` - Basic Flask application
 - `templates/index.html` - Basic HTML template
 - `requirements.txt` - Python dependencies
-- `app-slug.service` - Systemd service file (MUST be renamed)
+- `app-template.service` - Systemd service file (MUST be renamed to NEW_SLUG.service)
 - `deploy.sh` - Server-side deployment script
 - `deploy-to-prod.sh` - Local deployment trigger script
 - `README.md` - Documentation
+- `CLAUDE.md` - Project context for Claude
 - `.gitignore` - Git ignore patterns
 
-## Placeholders to Replace
+## Values to Replace
 
-- `APP_NAME` - Display name (e.g., "Color The Map")
-- `APP_SLUG` - URL slug (e.g., "color-the-map")
-- `APP_DESCRIPTION` - Short description
-- `APP_ICON` - Emoji icon
-- `APP_PORT` - Port number (default: 7999 for template, actual apps use 8001+)
+- "App Template" → Display name (e.g., "Color The Map")
+- "app-template" → URL slug (e.g., "color-the-map")
+- "Template for creating new home server applications" → Short description
+- "📱" → Emoji icon
+- "7999" → Port number (actual apps use 8001, 8002, 8003, etc.)
 
 ## Important Notes
 
