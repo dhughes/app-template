@@ -11,8 +11,8 @@ When the user asks you to create a new app from this template, follow these step
    - App slug (URL-safe name, e.g., "my-cool-app")
    - App description (short description for the app card)
    - App icon (emoji, e.g., "🚀")
-   - Port number (find the next available port by checking existing apps in /Users/doughughes/Projects/Personal/*/caddy.conf)
-   - Whether the app should be public or private (add/remove forward_auth in caddy.conf)
+   - Port number (find the next available port by checking existing apps in /Users/doughughes/Projects/Personal/*/caddy-subdomain.conf)
+   - Whether the app should be public or private (add/remove forward_auth in caddy-subdomain.conf)
 
 2. **Copy this template to a new directory:**
    ```bash
@@ -21,13 +21,13 @@ When the user asks you to create a new app from this template, follow these step
 
 3. **Replace all instances in the new directory:**
    - "App Template" → actual display name (in app.json, *.service, deploy scripts, README.md, CLAUDE.md, index.html, app.py)
-   - "app-template" → URL-safe slug (in caddy.conf, *.service, deploy scripts, README.md, CLAUDE.md)
+   - "app-template" → URL-safe slug (in caddy-subdomain.conf, *.service, deploy scripts, README.md, CLAUDE.md)
    - "📱" → emoji icon (in app.json, index.html)
    - "Template for creating new home server applications" → description (in app.json, README.md)
-   - "7999" → port number (in caddy.conf, app.py, index.html, README.md)
+   - "7999" → port number (in caddy-subdomain.conf, app.py, index.html, README.md)
    - Rename `app-template.service` to `NEW_SLUG.service`
 
-4. **Update caddy.conf for public vs private:**
+4. **Update caddy-subdomain.conf for public vs private:**
    - Private apps (default): keep `forward_auth` block
    - Public apps: remove the `forward_auth` block
 
@@ -48,7 +48,7 @@ When the user asks you to create a new app from this template, follow these step
 All files in this template use "App Template", "app-template", "📱", "7999", etc. that need to be replaced:
 
 - `app.json` - App metadata for the index page
-- `caddy.conf` - Reverse proxy configuration (includes forward_auth for private apps by default)
+- `caddy-subdomain.conf` - Subdomain reverse proxy configuration (includes forward_auth for private apps by default)
 - `app.py` - Basic Flask application
 - `templates/index.html` - Basic HTML template
 - `requirements.txt` - Python dependencies
@@ -67,11 +67,24 @@ All files in this template use "App Template", "app-template", "📱", "7999", e
 - "📱" → Emoji icon
 - "7999" → Port number (actual apps use 8001, 8002, 8003, etc.)
 
+## Subdomain Structure
+
+Apps are served on subdomains following the pattern: `{slug}.doughughes.net`
+
+For example:
+- `color-the-map` app → `color-the-map.doughughes.net`
+- `cranium-charades` app → `cranium-charades.doughughes.net`
+
+Apps run at webroot (no path prefixes or base URL configuration needed).
+
 ## Important Notes
 
 - Port 7999 is for the template itself (if testing)
 - Port 8000 is reserved for the auth service
 - Actual apps should use ports 8001, 8002, 8003, etc.
 - Check existing apps to find the next available port
-- Private apps need `forward_auth` in caddy.conf (included by default)
-- Public apps should remove the `forward_auth` block from caddy.conf
+- Private apps need `forward_auth` in caddy-subdomain.conf (included by default)
+- Public apps should remove the `forward_auth` block from caddy-subdomain.conf
+- All apps are accessed via `{slug}.doughughes.net` subdomain
+- Wildcard DNS (`*.doughughes.net`) routes all subdomains to the server
+- Cloudflare proxy provides SSL for all subdomains automatically
