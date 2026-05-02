@@ -17,9 +17,7 @@ sudo /mnt/data/infrastructure/deploy.sh caddy
 
 # Restart service
 echo "📋 Updating systemd unit..."
-sudo cp app-template.service /etc/systemd/system/app-template.service
-sudo chmod 644 /etc/systemd/system/app-template.service
-sudo systemctl daemon-reload
+sudo /mnt/data/infrastructure/deploy.sh service app-template
 echo "🔄 Restarting service..."
 sudo systemctl restart app-template
 
